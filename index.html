@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#16352d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Movia">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./assets/movia-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Movia</title>
+</head>
+<body>
+  <header class="topbar"><div class="logo">M</div><div><strong>Movia</strong><small id="status">Ton entraînement, à ton rythme</small></div><button class="quiet" id="install" hidden>Installer</button></header>
+  <main id="app" aria-live="polite"></main>
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <button data-page="home" class="active">Accueil</button><button data-page="plan">Programme</button><button data-page="run">Course</button><button data-page="history">Historique</button><button data-page="settings">Réglages</button>
+  </nav>
+  <input id="planFile" type="file" accept=".csv,text/csv" hidden><input id="dataFile" type="file" accept=".json,application/json" hidden>
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+const CACHE="movia-web-pwa-v1";const ROOT=new URL("./",self.location.href);const SHELL=["index.html","styles.css","app.js","manifest.webmanifest","assets/icon.svg","assets/movia-icon.png"].map(p=>new URL(p,ROOT).href);
+self.addEventListener("install",e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(SHELL);await self.skipWaiting()})()));
+self.addEventListener("activate",e=>e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim()})()));
+self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET"||new URL(r.url).origin!==location.origin)return;e.respondWith((async()=>{const c=await caches.open(CACHE),hit=await c.match(r);if(hit)return hit;try{const res=await fetch(r);if(res.ok)c.put(r,res.clone());return res}catch{return Response.error()}})())});

@@ -1,0 +1,13 @@
+{
+  "name": "Movia — entraînement personnel",
+  "short_name": "Movia",
+  "lang": "fr-FR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f2",
+  "theme_color": "#16352d",
+  "icons": [
+    { "src": "./assets/movia-icon.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
