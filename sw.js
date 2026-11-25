@@ -1,4 +1,6 @@
-const CACHE="movia-web-pwa-v2";const ROOT=new URL("./",self.location.href);const SHELL=["index.html","styles.css","app.js","manifest.webmanifest","assets/icon.svg","assets/movia-icon.png"].map(p=>new URL(p,ROOT).href);
-self.addEventListener("install",e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(SHELL);await self.skipWaiting()})()));
-self.addEventListener("activate",e=>e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==CACHE)await caches.delete(k);await self.clients.claim()})()));
-self.addEventListener("fetch",e=>{const r=e.request;if(r.method!=="GET"||new URL(r.url).origin!==location.origin)return;e.respondWith((async()=>{const c=await caches.open(CACHE),hit=await c.match(r);if(hit)return hit;try{const res=await fetch(r);if(res.ok)c.put(r,res.clone());return res}catch{return Response.error()}})())});
+const CACHE="movia-web-pwa-v3";
+const ROOT=new URL("./",self.location.href);
+const SHELL=["index.html","styles.css","app.js","manifest.webmanifest","assets/icon.svg","assets/movia-icon.png"].map(p=>new URL(p,ROOT).href);
+self.addEventListener("install",event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(SHELL);await self.skipWaiting()})()));
+self.addEventListener("activate",event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key!==CACHE)await caches.delete(key);await self.clients.claim()})()));
+self.addEventListener("fetch",event=>{const request=event.request;if(request.method!=="GET"||new URL(request.url).origin!==location.origin)return;event.respondWith((async()=>{const cache=await caches.open(CACHE);const cached=await cache.match(request);if(cached)return cached;try{const response=await fetch(request);if(response.ok)cache.put(request,response.clone());return response}catch{return Response.error()}})())});
